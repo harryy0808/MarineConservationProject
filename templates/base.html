@@ -21,34 +21,6 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                <li class="nav-item">
-                  <a class="nav-link active" href="{{ url_for('map') }}">Interactive Map</a>
-                </li>
-
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Game
-                  </a>
-
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{url_for('start_quiz', quiz_id='animals')}}">Animal Quiz</a></li>
-                    <li><a class="dropdown-item" href="{{url_for('plastic_game')}}">Plastic Game</a></li>
-                  </ul>
-
-                </li>
-
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                    Translate
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">English</a></li>
-                    <li><a class="dropdown-item" href="#">Japanese</a></li>
-                    <li><a class="dropdown-item" href="#">Chinese</a></li>
-                    <li><a class="dropdown-item" href="#">Korean</a></li>
-                  </ul>
-                </li>
-
               </ul>
 
               <form class="d-flex" role="search">
@@ -65,4 +37,3 @@
         {% block body_content %} {% endblock %}
     </body>
 </html>
-
