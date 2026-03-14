@@ -3,4 +3,210 @@
 {% block title %}Home Page{% endblock %}
 {% block body_content %}
 
+<div class="d-flex align-items-center gap-3">
+    <button id = "resetbtn" type="button" class="btn" style="background-color:Aquamarine;">Reset</button>
+    <div id="scoreBox">Score: 0</div>
+</div>
+
+<canvas id="game" style = "background-color: MediumTurquoise;"></canvas>
+
+
+
+<script>
+    const height = 530;
+    const width = 1250;
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
+    const scoreBox = document.getElementById("scoreBox");
+    canvas.height = height;
+    canvas.width = width;
+
+    // image for background
+    const BackgroundImg = new Image();
+    BackgroundImg.src = "{{url_for('static', filename='images/sea_background.png') }}";
+    // Load images
+    const shipImg = new Image();
+    shipImg.src = "{{url_for('static', filename='images/boat_1.png') }}";
+
+    // Load images for plastic
+    const plasticImg = new Image();
+    plasticImg.src = "{{url_for('static', filename='images/plastic_2.png') }}";
+
+    let score = 0;
+
+
+
+
+    // Player data
+    const player = {
+        x: 280,
+        y: 180,
+        size: 40,
+        speed: 4
+    };
+
+    // plastic data
+    const plastic = {
+        x: 200,
+        y: 200,
+        size: 40,
+        vx: Math.random(),
+        vy: Math.random(),
+        visible: true
+    };
+
+    const plastics = [
+        {x: 200, y: 200, size: 40, vx: Math.random(), vy: Math.random(), visible: true},
+        {x: 300, y: 100, size: 40, vx: Math.random(), vy: Math.random(), visible: true},
+        {x: 0, y: 200, size: 40, vx: Math.random(), vy: Math.random(), visible: true},
+
+    ];
+
+    const keys = {
+        ArrowUp: false,
+        ArrowDown: false,
+        ArrowLeft: false,
+        ArrowRight: false
+    };
+
+
+    // Draw background
+
+    function drawBackground(){
+        ctx.drawImage(BackgroundImg, 0, 0, width, height);
+    }
+
+
+    // Draw Player
+    function drawPlayer() {
+
+        ctx.drawImage(shipImg, player.x, player.y, player.size, player.size);
+
+      //ctx. fillStyle = "black";
+      //ctx.fillRect(player.x, player.y, player.size, player.size);
+    }
+
+    // draw plastic
+    function drawPlastic() {
+        for (const plastic of plastics){
+            if (plastic.visible == true){
+                ctx.drawImage(plasticImg, plastic.x, plastic.y, plastic.size, plastic.size);
+            }
+        }
+    }
+
+    // Update player position
+    function update() {
+      if (keys.ArrowLeft) {
+          if (player.x > 0) {
+              player.x -= player.speed;
+          }
+      }
+
+      if (keys.ArrowRight){
+          if (player.x < 1250 - player.size){
+              player.x += player.speed;
+          }
+      }
+
+      if (keys.ArrowDown){
+          if (player.y < height - player.size){
+              player.y += player.speed;
+          }
+      }
+
+      if (keys.ArrowUp){
+          if (player.y > 0){
+              player.y -= player.speed;
+          }
+      }
+
+    // update trash
+    for (const plastic of plastics){
+
+      if (plastic.x < 0 || plastic.x > 1250 - plastic.size){
+          plastic.vx = plastic.vx * -1;
+      }
+
+      if (plastic.y < 0 || plastic.y > height - plastic.size){
+          plastic.vy = plastic.vy * -1;
+      }
+
+      plastic.x += plastic.vx;
+      plastic.y += plastic.vy;
+
+    }
+    }
+
+
+   function isColliding(sprite1, sprite2){
+        let hit =
+            sprite1.x + sprite1.size >= sprite2.x &&  //sprite1's right side is past sprite2's left
+            sprite1.x <= sprite2.x + sprite2.size &&  //sprite1's left side is before sprite2's right
+            sprite1.y + sprite1.size >= sprite2.y &&  //sprite1's bottom is below sprite2's top
+            sprite1.y <= sprite2.y + sprite2.size;    //sprite1's top is above sprite2's bottom
+
+        return hit;
+    }
+
+    function resetGame(){
+        player.x= 280;
+        player.y= 180;
+
+        for (const plastic of plastics){
+            plastic.x = player.x
+            plastic.y = player.y
+
+            while (isColliding(player, plastic) == true){
+                plastic.x= Math.floor(Math.random() * width - 100) + 20;
+                plastic.y= Math.floor(Math.random() * height - 100) + 20;
+            }
+            plastic.visible= true;
+        }
+        score = 0;
+        scoreBox.textContent = "Score: " + score
+    }
+
+    // Clear and draw
+    function gameLoop() {
+      ctx.clearRect(0,0, canvas.width, canvas.height);
+      update();
+      drawBackground();
+      drawPlayer();
+
+    for (const plastic of plastics){
+      if (plastic.visible && isColliding(player, plastic) == true){
+          score += 1;
+          scoreBox.textContent = "Score: " + score;
+
+          plastic.visible = false;
+      }
+      else{
+          drawPlastic();
+      }
+    }
+
+      requestAnimationFrame(gameLoop);
+    }
+
+
+
+    // Key Listeners
+    window.addEventListener("keydown", e => {
+      if (e.key in keys) keys[e.key] = true;
+    });
+
+    window.addEventListener("keyup", e => {
+      if (e.key in keys) keys[e.key] = false;
+    });
+
+    document.getElementById("resetbtn").addEventListener("click",
+    function () {
+        resetGame();
+    });
+
+    gameLoop();
+
+</script>
+
 {% endblock %}
