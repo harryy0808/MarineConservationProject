@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Quiz Results{% endblock %}
+{% block body_content %}
+    <div class="container text-center mt-5">
+        <h1>Your score: {{score}}</h1>
+        <a href = "{{url_for('start_quiz', quiz_id = session.get('current_quiz'))}}" class="btn btn-success mt-3">Play Again</a>
+
+    </div>
+{% endblock %}

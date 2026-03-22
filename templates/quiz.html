@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block title %}Animal Information Page{% endblock %}
+{% block body_content %}
+
+    <h1 class="text-center">{{quiz_name}} Quiz</h1>
+    <div class="container text-center mt-5 flash">
+        <h2 class="mb-4">{{question['question']}}</h2>
+        <form method="POST" action="{{url_for('answer')}}">
+            <div class="row justify-content-center">
+
+                {% for option in options %}
+
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+                    <button type= "submit" name="option" value="{{option}}" class="btn btn-light">
+                        <img src="{{url_for('static', filename='images/' + option) }}" alt="{{option}}" class="object-fit-cover border rounded" style="width: 150px; height: 150px;">
+                    </button>
+
+                </div>
+                {% endfor %}
+            </div>
+        </form>
+
+    </div>
+
+
+{% endblock %}
