@@ -102,3 +102,7 @@ def answer():
 def result():
     return render_template('result.html', score=session.get('score', 0))
 
+@app.route("/map")
+def map():
+    return render_template("map.html")
+
