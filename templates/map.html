@@ -12,7 +12,7 @@
         <div style="top:20px; left: 400px; popover-max-width: 400;" class="position-absolute">
 
 
-            <button onclick="hidPopover()" tabindex="0" id="PopHokkaido" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-trigger="focus" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none; popover-max-width:400;">
+            <button id="PopHokkaido" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
                 <div class="card">
                     <div class="card-header bg-primary text-white">Hokkaido</div>
                     <div class="card-body fs-6">
@@ -99,10 +99,18 @@
     </div>
 
 <script>
-    function hidPopover(e){
-        const pop = bootstrap.Popover.getInstance(e);
-        console.log("pizza");
+
+    function hideAllPopovers(){
+        // ^ is startwith. Get all elements that start with "Pop"
+        const popovers = document.querySelectorAll('[id^="Pop"]');
+
+        // Hide each element
+        popovers.forEach(pop => {
+            pop.style.visibility = "hidden";
+            pop.style.display = "none";
+        });
     }
+
     const obj = document.getElementById("mapObj");
     console.log(obj)
 
@@ -120,8 +128,16 @@
     groups.forEach(region => {
         region.style.cursor = "crosshair";
         console.log(region);
+
+
         region.addEventListener("click", () => {
             console.log("Clicked:", region.id);
+
+            // call hide all popovers
+            event.stopPropagation();
+            hideAllPopovers();
+
+
             if (region.id){
                 var pop = document.getElementById("Pop" + region.id);
                 pop.style.visibility = "visible";
