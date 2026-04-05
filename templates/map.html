@@ -6,102 +6,103 @@
 
 
 
-
-
-
-
-    <div id="mapWrapper" class="position-relative" style="text-align: center; position: relative;">
+    <div id="mapWrapper" class="position-relative text-center" style="text-align: center; position: relative;">
         <object id="mapObj" data="{{url_for('static', filename='images/Japan_map.svg')}}" type="image/svg+xml" style="width:38%;" class="center"></object>
 
-    <div style="top:20 left: 20;" class="position-absolute">
+        <div style="top:20px; left: 400px; popover-max-width: 400;" class="position-absolute">
 
-        <button id="PopHokkaido" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
-            <div class="card">
-                <div class="card-header bg-primary text-white">Hokkaido</div>
-                <div class="card-body">
-                    <p class='card-text'>Hokkaido is located near Russia</p>
+
+            <button onclick="hidPopover()" tabindex="0" id="PopHokkaido" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-trigger="focus" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none; popover-max-width:400;">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Hokkaido</div>
+                    <div class="card-body fs-6">
+                        <p class='card-text'>Hokkaido is located near Russia</p>
+                    </div>
                 </div>
-            </div>
 
-        </button>
+            </button>
 
-        <button id="PopTohoku" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
-            <div class="card">
-                <div class="card-header bg-primary text-white">Tohoku</div>
-                <div class="card-body">
-                    <p class='card-text'>Tohoku is located beneath Hokkaido</p>
+            <button id="PopTohoku" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Tohoku</div>
+                    <div class="card-body">
+                        <p class='card-text'>Tohoku is located beneath Hokkaido</p>
+                    </div>
                 </div>
-            </div>
-        </button>
+            </button>
 
-        <button id="PopKanto" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
-            <div class="card">
-                <div class="card-header bg-primary text-white">Kanto</div>
-                <div class="card-body">
-                    <p class='card-text'>Kanto is located beneath Tohoku</p>
+            <button id="PopKanto" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Kanto</div>
+                    <div class="card-body">
+                        <p class='card-text'>Kanto is located beneath Tohoku</p>
+                    </div>
                 </div>
-            </div>
-        </button>
+            </button>
 
-        <button id="PopChubu" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
-            <div class="card">
-                <div class="card-header bg-primary text-white">Chubu</div>
-                <div class="card-body">
-                    <p class='card-text'>Chubu is located next to Kanto</p>
+            <button id="PopChubu" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Chubu</div>
+                    <div class="card-body">
+                        <p class='card-text'>Chubu is located next to Kanto</p>
+                    </div>
                 </div>
-            </div>
-        </button>
+            </button>
 
-        <button id="PopKansai" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
-            <div class="card">
-                <div class="card-header bg-primary text-white">Kansai</div>
-                <div class="card-body">
-                    <p class='card-text'>Kansai is located next to Chubu</p>
+            <button id="PopKansai" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Kansai</div>
+                    <div class="card-body">
+                        <p class='card-text'>Kansai is located next to Chubu</p>
+                    </div>
                 </div>
-            </div>
-        </button>
+            </button>
 
-        <button id="PopChugoku" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
-            <div class="card">
-                <div class="card-header bg-primary text-white">Chugoku</div>
-                <div class="card-body">
-                    <p class='card-text'>Chugoku</p>
+            <button id="PopChugoku" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Chugoku</div>
+                    <div class="card-body">
+                        <p class='card-text'>Chugoku</p>
+                    </div>
                 </div>
-            </div>
-        </button>
+            </button>
 
-        <button id="PopShikoku" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
-            <div class="card">
-                <div class="card-header bg-primary text-white">Shikoku</div>
-                <div class="card-body">
-                    <p class='card-text'>Shikoku</p>
+            <button id="PopShikoku" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Shikoku</div>
+                    <div class="card-body">
+                        <p class='card-text'>Shikoku</p>
+                    </div>
                 </div>
-            </div>
-        </button>
+            </button>
 
-        <button id="PopKyushu" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
-            <div class="card">
-                <div class="card-header bg-primary text-white">Kyushu</div>
-                <div class="card-body">
-                    <p class='card-text'>Kyushu</p>
+            <button id="PopKyushu" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Kyushu</div>
+                    <div class="card-body">
+                        <p class='card-text'>Kyushu</p>
+                    </div>
                 </div>
-            </div>
-        </button>
+            </button>
 
-        <button id="PopOkinawa" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
-            <div class="card">
-                <div class="card-header bg-primary text-white">Okinawa</div>
-                <div class="card-body">
-                    <p class='card-text'>Okinawa</p>
+            <button id="PopOkinawa" type="button" class="btn btn-lg btn-danger position-absolute" data-bs-toggle="popover" data-bs-title="" data-bs-placement="bottom" data-bs-content="" style="visibility: hidden; background-color:white; border:2px solid white; display: none;">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Okinawa</div>
+                    <div class="card-body">
+                        <p class='card-text'>Okinawa</p>
+                    </div>
                 </div>
-            </div>
-        </button>
+            </button>
 
-    </div>
+        </div>
 
     </div>
 
 <script>
+    function hidPopover(e){
+        const pop = bootstrap.Popover.getInstance(e);
+        console.log("pizza");
+    }
     const obj = document.getElementById("mapObj");
     console.log(obj)
 
@@ -118,20 +119,16 @@
 
     groups.forEach(region => {
         region.style.cursor = "crosshair";
-    console.log(region)
+        console.log(region);
         region.addEventListener("click", () => {
             console.log("Clicked:", region.id);
             if (region.id){
                 var pop = document.getElementById("Pop" + region.id);
                 pop.style.visibility = "visible";
                 pop.style.display = "block";
+                pop.focus();
+                pop.setAttribute('tabindex', '0');
 
-
-            //     const popover = new bootstrap.Popover.getOrCreateInstance(this, {
-            //     container: 'body',
-            //     content: "click"
-            //     });
-            // popover.show();
             }
         });
     });
@@ -142,3 +139,4 @@
 
 </script>
 {% endblock %}
+
